@@ -1,0 +1,6 @@
+= Vivi
+
+This project rocks and uses MIT-LICENSE.
+
+First things first, include all of the Mimi migrations:
+bundle exec rake railties:install:migrations

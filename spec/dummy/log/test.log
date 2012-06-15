@@ -1,0 +1,801 @@
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (44.7ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (1.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "mimi_docs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) DEFAULT '', "asset_file_name" varchar(255) DEFAULT '', "asset_content_type" varchar(255) DEFAULT '', "asset_file_size" integer, "asset_updated_at" datetime, "asset_resolution" varchar(255) DEFAULT '', "asset_dpi" integer DEFAULT 0, "asset_remote_url" varchar(255) DEFAULT '', "processing" boolean DEFAULT 't', "views" integer DEFAULT 0, "created_by" integer, "uuid" varchar(255) DEFAULT '' NOT NULL, "ext_ref" integer, "cover" varchar(255) DEFAULT '', "poster_for" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120511212145')
+Migrating to CreateMimiAlbums (20120511213652)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "mimi_albums" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT '', "description" text, "type" varchar(64) DEFAULT '', "created_by" integer, "status" varchar(255) DEFAULT 'publish', "submission_priv" varchar(255) DEFAULT 'open', "view_priv" varchar(255) DEFAULT 'public', "promoted" boolean DEFAULT 'f', "promoted_by" integer, "promoted_at" datetime, "uuid" varchar(255) DEFAULT '' NOT NULL, "ext_ref" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (12.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120511213652')
+Migrating to CreateMimiAlbumings (20120511213745)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "mimi_albumings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "album_id" integer, "doc_id_id" integer, "position" integer, "submitted_by" integer, "submitted_at" datetime, "approved" boolean DEFAULT 'f', "approved_by" integer, "approved_at" datetime, "approval_notes" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120511213745')
+Migrating to CreateMimiMetadata (20120511215137)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "mimi_metadata" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "doc_id" integer, "description" text, "culture" varchar(128) DEFAULT '', "creation_start_at" date, "creation_end_at" date, "current_location" varchar(128) DEFAULT '', "medium" varchar(128) DEFAULT '', "dimensions" varchar(32) DEFAULT '', "period_style" varchar(128) DEFAULT '', "language" varchar(64) DEFAULT '', "source" varchar(64) DEFAULT '', "digitization_spec" varchar(255) DEFAULT '', "subject_headings" text, "subject_matter" varchar(255) DEFAULT '', "type_of_work" varchar(255) DEFAULT '', "media_credits" varchar(255) DEFAULT '', "caption" varchar(255) DEFAULT '', "right_id" integer DEFAULT 1, "publish_status" varchar(255) DEFAULT 'local-only', "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120511215137')
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_albumings")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albums")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_docs")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadata")
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.7ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", ""], ["asset_dpi", 0], ["asset_file_name", ""], ["asset_file_size", nil], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", nil], ["cover", ""], ["created_at", Fri, 25 May 2012 22:06:03 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 22:06:03 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-25 15:06:03 -0700
+  Processing by Mimi::DocsController#index as HTML
+Completed 500 Internal Server Error in 1ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", ""], ["asset_dpi", 0], ["asset_file_name", ""], ["asset_file_size", nil], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", nil], ["cover", ""], ["created_at", Fri, 25 May 2012 22:06:03 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 22:06:03 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-25 15:06:03 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mMimi::Doc Load (0.1ms)[0m  [1mSELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = ? LIMIT 1[0m  [["id", "1"]]
+Completed 500 Internal Server Error in 2ms
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.7ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", ""], ["asset_dpi", 0], ["asset_file_name", ""], ["asset_file_size", nil], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", nil], ["cover", ""], ["created_at", Fri, 25 May 2012 22:08:30 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 22:08:30 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-25 15:08:30 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[35mMimi::Album Load (0.2ms)[0m  SELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC
+Completed 500 Internal Server Error in 7ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", ""], ["asset_dpi", 0], ["asset_file_name", ""], ["asset_file_size", nil], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", nil], ["cover", ""], ["created_at", Fri, 25 May 2012 22:08:30 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 22:08:30 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-25 15:08:30 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = ? LIMIT 1  [["id", "1"]]
+Completed 500 Internal Server Error in 2ms
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.6ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", ""], ["asset_dpi", 0], ["asset_file_name", ""], ["asset_file_size", nil], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", nil], ["cover", ""], ["created_at", Fri, 25 May 2012 22:09:28 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 22:09:28 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-25 15:09:28 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[35mMimi::Album Load (0.2ms)[0m  SELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC
+Completed 500 Internal Server Error in 7ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", ""], ["asset_dpi", 0], ["asset_file_name", ""], ["asset_file_size", nil], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", nil], ["cover", ""], ["created_at", Fri, 25 May 2012 22:09:28 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 22:09:28 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-25 15:09:28 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Album Load (0.2ms)[0m  SELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC
+  [1m[36mMimi::Doc Load (0.1ms)[0m  [1mSELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1[0m
+Completed 500 Internal Server Error in 7ms
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.7ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", ""], ["asset_dpi", 0], ["asset_file_name", ""], ["asset_file_size", nil], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", nil], ["cover", ""], ["created_at", Fri, 25 May 2012 22:09:59 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 22:09:59 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-25 15:09:59 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[35mMimi::Album Load (0.2ms)[0m  SELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC
+Completed 500 Internal Server Error in 7ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", ""], ["asset_dpi", 0], ["asset_file_name", ""], ["asset_file_size", nil], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", nil], ["cover", ""], ["created_at", Fri, 25 May 2012 22:09:59 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 22:09:59 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-25 15:09:59 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+Completed 500 Internal Server Error in 6ms
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.6ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Fri, 25 May 2012 23:14:06 UTC +00:00], ["cover", ""], ["created_at", Fri, 25 May 2012 23:14:06 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 23:14:06 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Fri, 25 May 2012 23:14:06 UTC +00:00], ["cover", ""], ["created_at", Fri, 25 May 2012 23:14:06 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 23:14:06 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35m (0.3ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.6ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Fri, 25 May 2012 23:23:45 UTC +00:00], ["cover", ""], ["created_at", Fri, 25 May 2012 23:23:45 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 23:23:45 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Fri, 25 May 2012 23:23:45 UTC +00:00], ["cover", ""], ["created_at", Fri, 25 May 2012 23:23:45 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 23:23:45 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35m (0.1ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Fri, 25 May 2012 23:25:15 UTC +00:00], ["cover", ""], ["created_at", Fri, 25 May 2012 23:25:15 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 23:25:15 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Fri, 25 May 2012 23:25:15 UTC +00:00], ["cover", ""], ["created_at", Fri, 25 May 2012 23:25:15 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 23:25:15 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.4ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Fri, 25 May 2012 23:46:16 UTC +00:00], ["cover", ""], ["created_at", Fri, 25 May 2012 23:46:16 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 23:46:16 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Fri, 25 May 2012 23:46:16 UTC +00:00], ["cover", ""], ["created_at", Fri, 25 May 2012 23:46:16 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Fri, 25 May 2012 23:46:16 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (51.1ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 17:15:22 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 17:15:22 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 17:15:22 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.1ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 17:15:22 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 17:15:22 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 17:15:22 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (11.4ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+Migrating to CreateMimiAlbums (20120511213652)
+Migrating to CreateMimiAlbumings (20120511213745)
+Migrating to CreateMimiMetadata (20120511215137)
+Migrating to CreateDelayedJobs (20120525232123)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "delayed_jobs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "priority" integer DEFAULT 0, "attempts" integer DEFAULT 0, "handler" text, "last_error" text, "run_at" datetime, "locked_at" datetime, "failed_at" datetime, "locked_by" varchar(255), "queue" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("delayed_jobs")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "delayed_jobs_priority" ON "delayed_jobs" ("priority", "run_at")[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120525232123')
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("delayed_jobs")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('delayed_jobs_priority')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_albumings")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albums")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_docs")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadata")
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 19:26:41 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 19:26:41 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 19:26:41 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 19:26:41 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 12:26:41.674853000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 19:26:41.675345000 Z\n    updated_at: 2012-05-29 19:26:41.675345000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 19:26:41 UTC +00:00], ["updated_at", Tue, 29 May 2012 19:26:41 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 12:26:41 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 11ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 19:26:41 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 19:26:41 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 19:26:41 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 19:26:41 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 12:26:41.788389000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 19:26:41.788845000 Z\n    updated_at: 2012-05-29 19:26:41.788845000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 19:26:41 UTC +00:00], ["updated_at", Tue, 29 May 2012 19:26:41 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 12:26:41 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+  [1m[36mMimi::Metadata Load (0.1ms)[0m  [1mSELECT "mimi_metadata".* FROM "mimi_metadata" WHERE "mimi_metadata"."doc_id" IN (1)[0m
+Completed 500 Internal Server Error in 52ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.5ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 19:35:50 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 19:35:50 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 19:35:50 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 19:35:50 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 12:35:50.914407000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 19:35:50.914939000 Z\n    updated_at: 2012-05-29 19:35:50.914939000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 19:35:50 UTC +00:00], ["updated_at", Tue, 29 May 2012 19:35:50 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 12:35:50 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 8ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 19:35:50 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 19:35:50 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 19:35:50 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 19:35:50 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 12:35:50.976785000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 19:35:50.977236000 Z\n    updated_at: 2012-05-29 19:35:50.977236000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 19:35:50 UTC +00:00], ["updated_at", Tue, 29 May 2012 19:35:50 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 12:35:50 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+  [1m[36mMimi::Metadata Load (0.1ms)[0m  [1mSELECT "mimi_metadata".* FROM "mimi_metadata" WHERE "mimi_metadata"."doc_id" IN (1)[0m
+Completed 500 Internal Server Error in 41ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 19:39:09 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 19:39:09 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 19:39:09 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 19:39:09 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 12:39:09.469048000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 19:39:09.469530000 Z\n    updated_at: 2012-05-29 19:39:09.469530000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 19:39:09 UTC +00:00], ["updated_at", Tue, 29 May 2012 19:39:09 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 12:39:09 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 8ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 19:39:09 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 19:39:09 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 19:39:09 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 19:39:09 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 12:39:09.528170000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 19:39:09.528618000 Z\n    updated_at: 2012-05-29 19:39:09.528618000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 19:39:09 UTC +00:00], ["updated_at", Tue, 29 May 2012 19:39:09 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 12:39:09 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+  [1m[36mMimi::Metadata Load (0.1ms)[0m  [1mSELECT "mimi_metadata".* FROM "mimi_metadata" WHERE "mimi_metadata"."doc_id" IN (1)[0m
+Completed 500 Internal Server Error in 38ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 19:40:59 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 19:40:59 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 19:40:59 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 19:40:59 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 12:40:59.248109000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 19:40:59.248612000 Z\n    updated_at: 2012-05-29 19:40:59.248612000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 19:40:59 UTC +00:00], ["updated_at", Tue, 29 May 2012 19:40:59 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 12:40:59 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 8ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 19:40:59 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 19:40:59 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 19:40:59 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 19:40:59 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 12:40:59.310661000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 19:40:59.311121000 Z\n    updated_at: 2012-05-29 19:40:59.311121000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 19:40:59 UTC +00:00], ["updated_at", Tue, 29 May 2012 19:40:59 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 12:40:59 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+  [1m[36mMimi::Metadata Load (0.1ms)[0m  [1mSELECT "mimi_metadata".* FROM "mimi_metadata" WHERE "mimi_metadata"."doc_id" IN (1)[0m
+Completed 500 Internal Server Error in 39ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 20:11:41 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 20:11:41 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 20:11:41 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 20:11:41 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 13:11:41.020257000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 20:11:41.020743000 Z\n    updated_at: 2012-05-29 20:11:41.020743000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 20:11:41 UTC +00:00], ["updated_at", Tue, 29 May 2012 20:11:41 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 13:11:41 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 2ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 20:11:41 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 20:11:41 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 20:11:41 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 20:11:41 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 13:11:41.074775000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 20:11:41.075214000 Z\n    updated_at: 2012-05-29 20:11:41.075214000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 20:11:41 UTC +00:00], ["updated_at", Tue, 29 May 2012 20:11:41 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 13:11:41 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+  [1m[36mMimi::Metadata Load (0.2ms)[0m  [1mSELECT "mimi_metadata".* FROM "mimi_metadata" WHERE "mimi_metadata"."doc_id" IN (1)[0m
+Completed 500 Internal Server Error in 37ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 20:14:00 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 20:14:00 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 20:14:00 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 20:14:00 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 13:14:00.325713000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 20:14:00.326196000 Z\n    updated_at: 2012-05-29 20:14:00.326196000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 20:14:00 UTC +00:00], ["updated_at", Tue, 29 May 2012 20:14:00 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 13:14:00 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 3ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 20:14:00 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 20:14:00 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 20:14:00 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 20:14:00 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 13:14:00.381202000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 20:14:00.381660000 Z\n    updated_at: 2012-05-29 20:14:00.381660000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 20:14:00 UTC +00:00], ["updated_at", Tue, 29 May 2012 20:14:00 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 13:14:00 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+  [1m[36mMimi::Metadata Load (0.2ms)[0m  [1mSELECT "mimi_metadata".* FROM "mimi_metadata" WHERE "mimi_metadata"."doc_id" IN (1)[0m
+Completed 500 Internal Server Error in 39ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.2ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 20:15:36 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 20:15:36 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 20:15:36 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 20:15:36 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 13:15:36.153165000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 20:15:36.153668000 Z\n    updated_at: 2012-05-29 20:15:36.153668000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 20:15:36 UTC +00:00], ["updated_at", Tue, 29 May 2012 20:15:36 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 13:15:36 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 8ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 20:15:36 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 20:15:36 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 20:15:36 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 20:15:36 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 13:15:36.213688000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 20:15:36.214150000 Z\n    updated_at: 2012-05-29 20:15:36.214150000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 20:15:36 UTC +00:00], ["updated_at", Tue, 29 May 2012 20:15:36 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 13:15:36 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+  [1m[36mMimi::Metadata Load (0.1ms)[0m  [1mSELECT "mimi_metadata".* FROM "mimi_metadata" WHERE "mimi_metadata"."doc_id" IN (1)[0m
+Completed 500 Internal Server Error in 38ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 20:18:08 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 20:18:08 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 20:18:08 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 20:18:08 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 13:18:08.939256000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 20:18:08.939763000 Z\n    updated_at: 2012-05-29 20:18:08.939763000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 20:18:08 UTC +00:00], ["updated_at", Tue, 29 May 2012 20:18:08 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 13:18:08 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 8ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 20:18:08 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 20:18:08 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 20:18:08 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 20:18:09 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 13:18:08.998895000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 20:18:08.999349000 Z\n    updated_at: 2012-05-29 20:18:08.999349000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 20:18:09 UTC +00:00], ["updated_at", Tue, 29 May 2012 20:18:09 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 13:18:09 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+  [1m[36mMimi::Metadata Load (0.1ms)[0m  [1mSELECT "mimi_metadata".* FROM "mimi_metadata" WHERE "mimi_metadata"."doc_id" IN (1)[0m
+Completed 500 Internal Server Error in 38ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 20:18:47 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 20:18:47 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 20:18:47 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 20:18:47 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 13:18:47.427624000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 20:18:47.428124000 Z\n    updated_at: 2012-05-29 20:18:47.428124000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 20:18:47 UTC +00:00], ["updated_at", Tue, 29 May 2012 20:18:47 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 13:18:47 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 8ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 20:18:47 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 20:18:47 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 20:18:47 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 20:18:47 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 13:18:47.487948000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 20:18:47.488408000 Z\n    updated_at: 2012-05-29 20:18:47.488408000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 20:18:47 UTC +00:00], ["updated_at", Tue, 29 May 2012 20:18:47 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 13:18:47 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+  [1m[36mMimi::Metadata Load (0.2ms)[0m  [1mSELECT "mimi_metadata".* FROM "mimi_metadata" WHERE "mimi_metadata"."doc_id" IN (1)[0m
+Completed 500 Internal Server Error in 38ms
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateDelayedJobs (20120525232123)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "delayed_jobs"
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120525232123'[0m
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albumings")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_albums")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_docs")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_metadata")[0m
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateMimiMetadata (20120511215137)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  DROP TABLE "mimi_metadata"
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120511215137'[0m
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albumings")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_albums")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_docs")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateMimiAlbumings (20120511213745)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "mimi_albumings"
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120511213745'[0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albums")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_docs")[0m
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateMimiAlbums (20120511213652)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("albums")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateMimiAlbums (20120511213652)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "mimi_albums"
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120511213652'[0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_docs")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateMimiDocs (20120511212145)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "mimi_docs"
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120511212145'[0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("docs")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_docs_on_created_by_and_created_at" ON "docs" ("created_by", "created_at")
+SQLite3::SQLException: no such table: main.docs: CREATE  INDEX "index_docs_on_created_by_and_created_at" ON "docs" ("created_by", "created_at")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_docs")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_docs_on_created_by_and_created_at" ON "mimi_docs" ("created_by", "created_at")
+SQLite3::SQLException: no such table: main.mimi_docs: CREATE  INDEX "index_docs_on_created_by_and_created_at" ON "mimi_docs" ("created_by", "created_at")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_docs")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_mimi_docs_on_created_by_and_created_at" ON "mimi_docs" ("created_by", "created_at")
+SQLite3::SQLException: no such table: main.mimi_docs: CREATE  INDEX "index_mimi_docs_on_created_by_and_created_at" ON "mimi_docs" ("created_by", "created_at")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "mimi_docs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) DEFAULT '', "asset_file_name" varchar(255) DEFAULT '', "asset_content_type" varchar(255) DEFAULT '', "asset_file_size" integer, "asset_updated_at" datetime, "asset_resolution" varchar(255) DEFAULT '', "asset_dpi" integer DEFAULT 0, "asset_remote_url" varchar(255) DEFAULT '', "processing" boolean DEFAULT 't', "views" integer DEFAULT 0, "created_by" integer, "uuid" varchar(255) DEFAULT '' NOT NULL, "ext_ref" integer, "cover" varchar(255) DEFAULT '', "poster_for" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_docs")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_mimi_docs_on_created_by_and_created_at" ON "mimi_docs" ("created_by", "created_at")[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120511212145')
+Migrating to CreateMimiAlbums (20120511213652)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "mimi_albums" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT '', "description" text, "type" varchar(64) DEFAULT '', "created_by" integer, "status" varchar(255) DEFAULT 'publish', "submission_priv" varchar(255) DEFAULT 'open', "view_priv" varchar(255) DEFAULT 'public', "promoted" boolean DEFAULT 'f', "promoted_by" integer, "promoted_at" datetime, "uuid" varchar(255) DEFAULT '' NOT NULL, "ext_ref" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albums")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_mimi_albums_on_created_by_and_updated_at" ON "mimi_albums" ("created_by", "updated_at")[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120511213652')
+Migrating to CreateMimiAlbumings (20120511213745)
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "mimi_albumings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "album_id" integer, "doc_id_id" integer, "position" integer, "submitted_by" integer, "submitted_at" datetime, "approved" boolean DEFAULT 'f', "approved_by" integer, "approved_at" datetime, "approval_notes" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albumings")
+  [1m[36m (0.2ms)[0m  [1mCREATE INDEX "index_mimi_albumings_on_doc_id_and_album_id" ON "mimi_albumings" ("doc_id", "album_id")[0m
+SQLite3::SQLException: table mimi_albumings has no column named doc_id: CREATE  INDEX "index_mimi_albumings_on_doc_id_and_album_id" ON "mimi_albumings" ("doc_id", "album_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+Migrating to CreateMimiAlbums (20120511213652)
+Migrating to CreateMimiAlbumings (20120511213745)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "mimi_albumings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "mimi_album_id" integer, "mimi_doc_id" integer, "position" integer, "submitted_by" integer, "submitted_at" datetime, "approved" boolean DEFAULT 'f', "approved_by" integer, "approved_at" datetime, "approval_notes" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albumings")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_mimi_albumings_on_doc_id_and_album_id" ON "mimi_albumings" ("mimi_doc_id", "mimi_album_id")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albumings")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_albumings_on_doc_id_and_album_id')[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_mimi_albumings_on_submitted_by_and_submitted_at" ON "mimi_albumings" ("submitted_by", "submitted_at")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120511213745')[0m
+Migrating to CreateMimiRights (20120511213750)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "mimi_rights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT '', "cc" boolean DEFAULT 'f', "ext_link" varchar(255) DEFAULT '') 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120511213750')[0m
+Migrating to CreateMimiMetadata (20120511215137)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+Migrating to CreateMimiAlbums (20120511213652)
+Migrating to CreateMimiAlbumings (20120511213745)
+Migrating to CreateMimiRights (20120511213750)
+Migrating to CreateMimiMetadata (20120511215137)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "mimi_metadata" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "mimi_doc_id" integer, "description" text, "culture" varchar(128) DEFAULT '', "creation_start_at" date, "creation_end_at" date, "current_location" varchar(128) DEFAULT '', "medium" varchar(128) DEFAULT '', "dimensions" varchar(32) DEFAULT '', "period_style" varchar(128) DEFAULT '', "language" varchar(64) DEFAULT '', "source" varchar(64) DEFAULT '', "digitization_spec" varchar(255) DEFAULT '', "subject_headings" text, "subject_matter" varchar(255) DEFAULT '', "type_of_work" varchar(255) DEFAULT '', "media_credits" varchar(255) DEFAULT '', "caption" varchar(255) DEFAULT '', "mimi_right_id" integer, "publish_status" varchar(255) DEFAULT 'local-only', "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadatas")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_mimi_metadatas_on_doc_id" ON "mimi_metadatas" ("mimi_doc_id")[0m
+SQLite3::SQLException: no such table: main.mimi_metadatas: CREATE  INDEX "index_mimi_metadatas_on_doc_id" ON "mimi_metadatas" ("mimi_doc_id")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+Migrating to CreateMimiAlbums (20120511213652)
+Migrating to CreateMimiAlbumings (20120511213745)
+Migrating to CreateMimiRights (20120511213750)
+Migrating to CreateMimiMetadata (20120511215137)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "mimi_metadatas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "mimi_doc_id" integer, "description" text, "culture" varchar(128) DEFAULT '', "creation_start_at" date, "creation_end_at" date, "current_location" varchar(128) DEFAULT '', "medium" varchar(128) DEFAULT '', "dimensions" varchar(32) DEFAULT '', "period_style" varchar(128) DEFAULT '', "language" varchar(64) DEFAULT '', "source" varchar(64) DEFAULT '', "digitization_spec" varchar(255) DEFAULT '', "subject_headings" text, "subject_matter" varchar(255) DEFAULT '', "type_of_work" varchar(255) DEFAULT '', "media_credits" varchar(255) DEFAULT '', "caption" varchar(255) DEFAULT '', "mimi_right_id" integer, "publish_status" varchar(255) DEFAULT 'local-only', "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadatas")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_mimi_metadatas_on_doc_id" ON "mimi_metadatas" ("mimi_doc_id")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadatas")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_metadatas_on_doc_id')[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_mimi_metadatas_on_right_id" ON "mimi_metadatas" ("mimi_right_id")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120511215137')[0m
+Migrating to CreateMimiCreators (20120525213750)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "mimi_creators" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT '', "culture" varchar(128) DEFAULT '', "role" varchar(128) DEFAULT '', "born_at" date, "died_at" date, "add_attr" varchar(255) DEFAULT '', "aka" varchar(255) DEFAULT '', "education" varchar(255) DEFAULT '', "movement" varchar(255) DEFAULT '', "reference_url" varchar(255) DEFAULT '', "notes" text, "uuid" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_creators")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_mimi_creators_on_name" ON "mimi_creators" ("name")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120525213750')[0m
+Migrating to CreateMimiCreatorings (20120525213790)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateMimiCreators (20120525213750)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_creators")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_creators_on_name')[0m
+  [1m[35m (0.3ms)[0m  DROP INDEX "index_mimi_creators_on_name"
+  [1m[36m (0.3ms)[0m  [1mDROP TABLE "mimi_creators"[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120525213750'
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_albumings")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_mimi_albumings_on_submitted_by_and_submitted_at')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_albumings_on_doc_id_and_album_id')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albums")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_albums_on_created_by_and_updated_at')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_docs")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_docs_on_created_by_and_created_at')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadatas")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_metadatas_on_right_id')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_mimi_metadatas_on_doc_id')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_rights")[0m
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateMimiMetadata (20120511215137)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadatas")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_metadatas_on_right_id')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_mimi_metadatas_on_doc_id')
+  [1m[36m (0.3ms)[0m  [1mDROP INDEX "index_mimi_metadatas_on_right_id"[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadatas")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_metadatas_on_doc_id')[0m
+  [1m[35m (0.2ms)[0m  DROP INDEX "index_mimi_metadatas_on_doc_id"
+  [1m[36m (0.2ms)[0m  [1mDROP TABLE "mimi_metadatas"[0m
+  [1m[35m (0.1ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120511215137'
+  [1m[36m (0.3ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_albumings")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_mimi_albumings_on_submitted_by_and_submitted_at')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_albumings_on_doc_id_and_album_id')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albums")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_albums_on_created_by_and_updated_at')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_docs")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_docs_on_created_by_and_created_at')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_rights")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateMimiRights (20120511213750)
+  [1m[36m (0.0ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.7ms)[0m  DROP TABLE "mimi_rights"
+  [1m[36m (0.1ms)[0m  [1mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20120511213750'[0m
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albumings")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_albumings_on_submitted_by_and_submitted_at')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_mimi_albumings_on_doc_id_and_album_id')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_albums")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_mimi_albums_on_created_by_and_updated_at')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_docs")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_mimi_docs_on_created_by_and_created_at')
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+Migrating to CreateMimiAlbums (20120511213652)
+Migrating to CreateMimiAlbumings (20120511213745)
+Migrating to CreateMimiRights (20120511213750)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "mimi_rights" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT '', "cc" boolean DEFAULT 'f', "ext_link" varchar(255) DEFAULT '') [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120511213750')
+Migrating to CreateMimiMetadata (20120511215137)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "mimi_metadatas" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "mimi_doc_id" integer, "description" text, "culture" varchar(128) DEFAULT '', "creation_start_at" date, "creation_end_at" date, "current_location" varchar(128) DEFAULT '', "medium" varchar(128) DEFAULT '', "dimensions" varchar(32) DEFAULT '', "period_style" varchar(128) DEFAULT '', "language" varchar(64) DEFAULT '', "source" varchar(64) DEFAULT '', "digitization_spec" varchar(255) DEFAULT '', "subject_headings" text, "subject_matter" varchar(255) DEFAULT '', "type_of_work" varchar(255) DEFAULT '', "media_credits" varchar(255) DEFAULT '', "caption" varchar(255) DEFAULT '', "mimi_right_id" integer, "publish_status" varchar(255) DEFAULT 'local-only', "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadatas")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_mimi_metadatas_on_doc_id" ON "mimi_metadatas" ("mimi_doc_id")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadatas")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_metadatas_on_doc_id')[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_mimi_metadatas_on_right_id" ON "mimi_metadatas" ("mimi_right_id")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120511215137')[0m
+Migrating to CreateMimiCreators (20120525213750)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "mimi_creators" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT '', "culture" varchar(128) DEFAULT '', "role" varchar(128) DEFAULT '', "born_at" date, "died_at" date, "add_attr" varchar(255) DEFAULT '', "aka" varchar(255) DEFAULT '', "education" varchar(255) DEFAULT '', "movement" varchar(255) DEFAULT '', "reference_url" varchar(255) DEFAULT '', "notes" text, "uuid" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_creators")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_mimi_creators_on_name" ON "mimi_creators" ("name")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120525213750')[0m
+Migrating to CreateMimiCreatorings (20120525213790)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "mimi_creatorings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "mimi_metadata_id" integer, "mimi_creator_id" integer, "position" integer DEFAULT 0, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_creatorings")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_mimi_creatorings_on_creator_id_and_metadata_id" ON "mimi_creatorings" ("mimi_creator_id", "mimi_metadata_id")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120525213790')[0m
+Migrating to CreateDelayedJobs (20120525232123)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+Migrating to CreateMimiAlbums (20120511213652)
+Migrating to CreateMimiAlbumings (20120511213745)
+Migrating to CreateMimiRights (20120511213750)
+Migrating to CreateMimiMetadata (20120511215137)
+Migrating to CreateMimiCreators (20120525213750)
+Migrating to CreateMimiCreatorings (20120525213790)
+Migrating to CreateMimiDelayedJobs (20120525232123)
+  [1m[35m (0.0ms)[0m  select sqlite_version(*)
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "mimi_delayed_jobs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "priority" integer DEFAULT 0, "attempts" integer DEFAULT 0, "handler" text, "last_error" text, "run_at" datetime, "locked_at" datetime, "failed_at" datetime, "locked_by" varchar(255), "queue" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_delayed_jobs")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "mimi_delayed_jobs_priority" ON "mimi_delayed_jobs" ("priority", "run_at")[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20120525232123')
+  [1m[36m (0.4ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_albumings")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_mimi_albumings_on_submitted_by_and_submitted_at')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_albumings_on_doc_id_and_album_id')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albums")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_albums_on_created_by_and_updated_at')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_creatorings")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_creatorings_on_creator_id_and_metadata_id')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_creators")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_creators_on_name')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_delayed_jobs")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('mimi_delayed_jobs_priority')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_docs")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_docs_on_created_by_and_created_at')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_metadatas")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('index_mimi_metadatas_on_right_id')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_info('index_mimi_metadatas_on_doc_id')
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_rights")[0m
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:12:01 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:12:01 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:12:01 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36m (0.0ms)[0m  [1mROLLBACK TO SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:12:01 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:12:01 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:12:01 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35m (0.0ms)[0m  ROLLBACK TO SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.6ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:14:14 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:14:14 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:14:14 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:14:14 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:14:14.512491000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:14:14.513052000 Z\n    updated_at: 2012-05-29 21:14:14.513052000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:14:14 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:14:14 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 14:14:14 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 8ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:14:14 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:14:14 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:14:14 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:14:14 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:14:14.573353000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:14:14.573825000 Z\n    updated_at: 2012-05-29 21:14:14.573825000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:14:14 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:14:14 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 14:14:14 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.2ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+Completed 500 Internal Server Error in 39ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.6ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:36:54 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:36:54 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:36:54 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:36:54 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:36:54.072816000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:36:54.073311000 Z\n    updated_at: 2012-05-29 21:36:54.073311000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:36:54 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:36:54 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 14:36:54 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 8ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:36:54 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:36:54 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:36:54 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:36:54 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:36:54.137611000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:36:54.138056000 Z\n    updated_at: 2012-05-29 21:36:54.138056000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:36:54 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:36:54 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 14:36:54 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+Completed 500 Internal Server Error in 39ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:40:08 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:40:08 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:40:08 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:40:08 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:40:08.826226000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:40:08.826715000 Z\n    updated_at: 2012-05-29 21:40:08.826715000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:40:08 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:40:08 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 14:40:08 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 2ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:40:08 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:40:08 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:40:08 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:40:08 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:40:08.879802000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:40:08.880268000 Z\n    updated_at: 2012-05-29 21:40:08.880268000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:40:08 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:40:08 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 14:40:08 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+Completed 500 Internal Server Error in 37ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:41:08 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:41:08 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:41:08 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:41:08 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:41:08.413925000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:41:08.414410000 Z\n    updated_at: 2012-05-29 21:41:08.414410000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:41:08 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:41:08 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 14:41:08 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 8ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:41:08 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:41:08 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:41:08 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:41:08 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:41:08.474074000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:41:08.474539000 Z\n    updated_at: 2012-05-29 21:41:08.474539000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:41:08 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:41:08 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 14:41:08 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+Completed 500 Internal Server Error in 40ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:41:33 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:41:33 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:41:33 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:41:33 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:41:33.074087000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:41:33.074574000 Z\n    updated_at: 2012-05-29 21:41:33.074574000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:41:33 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:41:33 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 14:41:33 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+Completed 500 Internal Server Error in 8ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:41:33 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:41:33 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:41:33 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:41:33 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:41:33.133914000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:41:33.134370000 Z\n    updated_at: 2012-05-29 21:41:33.134370000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:41:33 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:41:33 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 14:41:33 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.2ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+Completed 500 Internal Server Error in 39ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.3ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:42:01 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:42:01 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:42:01 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:42:01 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:42:01.745767000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:42:01.746268000 Z\n    updated_at: 2012-05-29 21:42:01.746268000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:42:01 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:42:01 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 14:42:01 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+nil
+Completed 500 Internal Server Error in 2ms
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:42:01 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:42:01 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:42:01 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:42:01 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:42:01.799611000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:42:01.800069000 Z\n    updated_at: 2012-05-29 21:42:01.800069000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:42:01 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:42:01 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 14:42:01 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.1ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+Completed 500 Internal Server Error in 38ms
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (3.4ms)[0m  INSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:43:20 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:43:20 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:43:20 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:43:20 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:43:20.642144000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:43:20.642631000 Z\n    updated_at: 2012-05-29 21:43:20.642631000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:43:20 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:43:20 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+
+
+Started GET "/mimi/docs" for 127.0.0.1 at 2012-05-29 14:43:20 -0700
+  Processing by Mimi::DocsController#index as HTML
+  [1m[36mMimi::Album Load (0.2ms)[0m  [1mSELECT "mimi_albums".* FROM "mimi_albums" ORDER BY created_at DESC[0m
+nil
+Rendered /Users/jwilliams/Development/rails/mimi/app/views/mimi/docs/index.html.erb within layouts/application (20.8ms)
+Completed 200 OK in 43ms (Views: 40.7ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "mimi_docs" ("asset_content_type", "asset_dpi", "asset_file_name", "asset_file_size", "asset_remote_url", "asset_resolution", "asset_updated_at", "cover", "created_at", "created_by", "ext_ref", "poster_for", "processing", "title", "updated_at", "uuid", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["asset_content_type", "image/jpeg"], ["asset_dpi", 0], ["asset_file_name", "test.jpg"], ["asset_file_size", 201078], ["asset_remote_url", ""], ["asset_resolution", ""], ["asset_updated_at", Tue, 29 May 2012 21:43:20 UTC +00:00], ["cover", ""], ["created_at", Tue, 29 May 2012 21:43:20 UTC +00:00], ["created_by", nil], ["ext_ref", nil], ["poster_for", nil], ["processing", true], ["title", "some terrific title"], ["updated_at", Tue, 29 May 2012 21:43:20 UTC +00:00], ["uuid", ""], ["views", 0]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "mimi_delayed_jobs" ("attempts", "created_at", "failed_at", "handler", "last_error", "locked_at", "locked_by", "priority", "queue", "run_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["attempts", 0], ["created_at", Tue, 29 May 2012 21:43:20 UTC +00:00], ["failed_at", nil], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Mimi::Doc\n  attributes:\n    id: 1\n    title: some terrific title\n    asset_file_name: test.jpg\n    asset_content_type: image/jpeg\n    asset_file_size: 201078\n    asset_updated_at: 2012-05-29 14:43:20.768078000 -07:00\n    asset_resolution: ''\n    asset_dpi: 0\n    asset_remote_url: ''\n    processing: true\n    views: 0\n    created_by: \n    uuid: ''\n    ext_ref: \n    cover: ''\n    poster_for: \n    created_at: 2012-05-29 21:43:20.768542000 Z\n    updated_at: 2012-05-29 21:43:20.768542000 Z\nmethod_name: :perform\nargs: []\n"], ["last_error", nil], ["locked_at", nil], ["locked_by", nil], ["priority", 0], ["queue", nil], ["run_at", Tue, 29 May 2012 21:43:20 UTC +00:00], ["updated_at", Tue, 29 May 2012 21:43:20 UTC +00:00]]
+[paperclip] Saving attachments.
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+
+
+Started GET "/mimi/docs/1" for 127.0.0.1 at 2012-05-29 14:43:20 -0700
+  Processing by Mimi::DocsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mMimi::Doc Load (0.2ms)[0m  SELECT "mimi_docs".* FROM "mimi_docs" WHERE "mimi_docs"."id" = 1 LIMIT 1
+Completed 500 Internal Server Error in 36ms

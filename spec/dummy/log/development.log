@@ -1,0 +1,156 @@
+
+
+Started GET "/" for 127.0.0.1 at 2012-05-11 14:20:42 -0700
+
+ActionController::RoutingError (No route matches [GET] "/"):
+  
+
+Rendered /Users/jwilliams/.rvm/gems/ruby-1.9.2-p290@rails3/gems/actionpack-3.1.4/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (13.3ms)
+
+
+Started GET "/mimi" for 127.0.0.1 at 2012-05-11 14:20:46 -0700
+
+ActionController::RoutingError (No route matches [GET] "/mimi"):
+  
+
+Rendered /Users/jwilliams/.rvm/gems/ruby-1.9.2-p290@rails3/gems/actionpack-3.1.4/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.5ms)
+
+
+Started GET "/mimi" for 127.0.0.1 at 2012-05-11 14:29:57 -0700
+  Processing by Mimi::DocsController#index as HTML
+Rendered /Users/jwilliams/Development/rails/mimi/app/views/mimi/docs/index.html.erb within layouts/mimi/application (6.1ms)
+Compiled mimi/application.css  (1ms)  (pid 5427)
+Compiled mimi/docs.css  (0ms)  (pid 5427)
+Compiled mimi/application.js  (3ms)  (pid 5427)
+Compiled jquery.js  (15ms)  (pid 5427)
+Compiled jquery_ujs.js  (1ms)  (pid 5427)
+Compiled mimi/docs.js  (0ms)  (pid 5427)
+Completed 200 OK in 103ms (Views: 102.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/mimi/application.css?body=1" for 127.0.0.1 at 2012-05-11 14:29:58 -0700
+Served asset /mimi/application.css - 200 OK (3ms)
+
+
+Started GET "/assets/mimi/docs.css?body=1" for 127.0.0.1 at 2012-05-11 14:29:58 -0700
+Served asset /mimi/docs.css - 200 OK (4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-11 14:29:58 -0700
+Served asset /jquery.js - 200 OK (5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-11 14:29:58 -0700
+Served asset /jquery_ujs.js - 200 OK (4ms)
+
+
+Started GET "/assets/mimi/docs.js?body=1" for 127.0.0.1 at 2012-05-11 14:29:58 -0700
+Served asset /mimi/docs.js - 200 OK (4ms)
+
+
+Started GET "/assets/mimi/application.js?body=1" for 127.0.0.1 at 2012-05-11 14:29:58 -0700
+Served asset /mimi/application.js - 200 OK (4ms)
+
+
+Started GET "/mimi" for 127.0.0.1 at 2012-05-11 14:53:14 -0700
+
+SyntaxError (/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:46: syntax error, unexpected ',', expecting tASSOC
+...d] }], :include => [{:metadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:46: syntax error, unexpected ',', expecting tASSOC
+...etadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:49: syntax error, unexpected ',', expecting tASSOC
+...cond], :include => [{:metadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:49: syntax error, unexpected ',', expecting tASSOC
+...etadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:303: syntax error, unexpected ',', expecting tASSOC
+...[:id], :include => [{:metadata,:creators}, {:taggings,:tag},...
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:303: syntax error, unexpected ',', expecting tASSOC
+...etadata,:creators}, {:taggings,:tag}, {:albumings,:album}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:303: syntax error, unexpected ',', expecting tASSOC
+... {:taggings,:tag}, {:albumings,:album}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:307: syntax error, unexpected ',', expecting tASSOC
+...DESC", :include => [{:metadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:307: syntax error, unexpected ',', expecting tASSOC
+...etadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:336: syntax error, unexpected $end, expecting keyword_end):
+  
+
+Rendered /Users/jwilliams/.rvm/gems/ruby-1.9.2-p290@rails3/gems/actionpack-3.1.4/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.8ms)
+Rendered /Users/jwilliams/.rvm/gems/ruby-1.9.2-p290@rails3/gems/actionpack-3.1.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
+Rendered /Users/jwilliams/.rvm/gems/ruby-1.9.2-p290@rails3/gems/actionpack-3.1.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (4.2ms)
+
+
+Started GET "/mimi" for 127.0.0.1 at 2012-05-11 16:47:12 -0700
+
+SyntaxError (/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:46: syntax error, unexpected ',', expecting tASSOC
+...d] }], :include => [{:metadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:46: syntax error, unexpected ',', expecting tASSOC
+...etadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:49: syntax error, unexpected ',', expecting tASSOC
+...cond], :include => [{:metadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:49: syntax error, unexpected ',', expecting tASSOC
+...etadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:303: syntax error, unexpected ',', expecting tASSOC
+...[:id], :include => [{:metadata,:creators}, {:taggings,:tag},...
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:303: syntax error, unexpected ',', expecting tASSOC
+...etadata,:creators}, {:taggings,:tag}, {:albumings,:album}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:303: syntax error, unexpected ',', expecting tASSOC
+... {:taggings,:tag}, {:albumings,:album}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:307: syntax error, unexpected ',', expecting tASSOC
+...DESC", :include => [{:metadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:307: syntax error, unexpected ',', expecting tASSOC
+...etadata,:creators}, {:taggings,:tag}])
+...                               ^
+/Users/jwilliams/Development/rails/mimi/app/controllers/mimi/docs_controller.rb:336: syntax error, unexpected $end, expecting keyword_end):
+  
+
+Rendered /Users/jwilliams/.rvm/gems/ruby-1.9.2-p290@rails3/gems/actionpack-3.1.4/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.9ms)
+Rendered /Users/jwilliams/.rvm/gems/ruby-1.9.2-p290@rails3/gems/actionpack-3.1.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.7ms)
+Rendered /Users/jwilliams/.rvm/gems/ruby-1.9.2-p290@rails3/gems/actionpack-3.1.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (3.4ms)
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.6ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (1.9ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateMimiDocs (20120511212145)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "mimi_docs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) DEFAULT '', "asset_file_name" varchar(255) DEFAULT '', "asset_content_type" varchar(255) DEFAULT '', "asset_file_size" integer, "asset_updated_at" datetime, "asset_resolution" varchar(255) DEFAULT '', "asset_dpi" integer DEFAULT 0, "asset_remote_url" varchar(255) DEFAULT '', "processing" boolean DEFAULT 't', "views" integer DEFAULT 0, "created_by" integer, "uuid" varchar(255) DEFAULT '' NOT NULL, "ext_ref" integer, "cover" varchar(255) DEFAULT '', "poster_for" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120511212145')[0m
+Migrating to CreateMimiAlbums (20120511213652)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "mimi_albums" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) DEFAULT '', "description" text, "type" varchar(64) DEFAULT '', "created_by" integer, "status" varchar(255) DEFAULT 'publish', "submission_priv" varchar(255) DEFAULT 'open', "view_priv" varchar(255) DEFAULT 'public', "promoted" boolean DEFAULT 'f', "promoted_by" integer, "promoted_at" datetime, "uuid" varchar(255) DEFAULT '' NOT NULL, "ext_ref" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120511213652')[0m
+Migrating to CreateMimiAlbumings (20120511213745)
+  [1m[35m (0.2ms)[0m  CREATE TABLE "mimi_albumings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "album_id" integer, "doc_id_id" integer, "position" integer, "submitted_by" integer, "submitted_at" datetime, "approved" boolean DEFAULT 'f', "approved_by" integer, "approved_at" datetime, "approval_notes" text, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120511213745')[0m
+Migrating to CreateMimiMetadata (20120511215137)
+  [1m[35m (0.3ms)[0m  CREATE TABLE "mimi_metadata" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "doc_id" integer, "description" text, "culture" varchar(128) DEFAULT '', "creation_start_at" date, "creation_end_at" date, "current_location" varchar(128) DEFAULT '', "medium" varchar(128) DEFAULT '', "dimensions" varchar(32) DEFAULT '', "period_style" varchar(128) DEFAULT '', "language" varchar(64) DEFAULT '', "source" varchar(64) DEFAULT '', "digitization_spec" varchar(255) DEFAULT '', "subject_headings" text, "subject_matter" varchar(255) DEFAULT '', "type_of_work" varchar(255) DEFAULT '', "media_credits" varchar(255) DEFAULT '', "caption" varchar(255) DEFAULT '', "right_id" integer DEFAULT 1, "publish_status" varchar(255) DEFAULT 'local-only', "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120511215137')[0m
+Migrating to CreateDelayedJobs (20120525232123)
+  [1m[35m (0.2ms)[0m  CREATE TABLE "delayed_jobs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "priority" integer DEFAULT 0, "attempts" integer DEFAULT 0, "handler" text, "last_error" text, "run_at" datetime, "locked_at" datetime, "failed_at" datetime, "locked_by" varchar(255), "queue" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("delayed_jobs")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "delayed_jobs_priority" ON "delayed_jobs" ("priority", "run_at")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120525232123')[0m
+  [1m[35m (0.3ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("delayed_jobs")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_info('delayed_jobs_priority')[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_albumings")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_albums")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("mimi_docs")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("mimi_metadata")[0m
